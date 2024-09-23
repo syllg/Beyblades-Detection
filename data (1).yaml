@@ -1,0 +1,6 @@
+train: /content/gdrive/MyDrive/TestCase_Kecilin/Beyblade/train/images
+val: /content/gdrive/MyDrive/TestCase_Kecilin/Beyblade/test/images
+test: /content/gdrive/MyDrive/TestCase_Kecilin/Beyblade/test/images
+
+nc: 1
+names: ['Beyblade']
