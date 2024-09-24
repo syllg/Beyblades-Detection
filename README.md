@@ -1,10 +1,9 @@
 # Beyblade Battle Analysis: Detection and Application Development
-# Beyblade Battle Analysis Application Development
 
 ## Overview
 Bakuten Shoot Corp. is a leading company in the manufacturing of Beyblades, constantly aiming to enhance the performance of their products to stay ahead in the competitive market. To achieve this, they require an advanced tool to analyze Beyblade battles. The purpose of this application is to process real-life Beyblade battle videos, extract detailed data regarding Beyblade performance, and generate valuable insights that can be used by data analysts to refine the product.
 
-As an AI developer, your task is to develop a program that reads Beyblade battle videos, detects key events (such as spinning, stopping, and other conditions), and generates a CSV file with relevant data. This data will aid in analyzing the performance and durability of the Beyblades, helping Bakuten Shoot Corp. improve the design and functionality of their products.
+As an AI developer, my task is to develop a program that reads Beyblade battle videos, detects key events (such as spinning, stopping, and other conditions), and generates a CSV file with relevant data. This data will aid in analyzing the performance and durability of the Beyblades, helping Bakuten Shoot Corp. improve the design and functionality of their products.
 
 ---
 
@@ -12,10 +11,10 @@ As an AI developer, your task is to develop a program that reads Beyblade battle
 The Beyblade detection model is based on the YOLO (You Only Look Once) architecture, specifically the YOLOv8 version, known for its real-time object detection capabilities. YOLOv8 balances accuracy and speed, making it an ideal choice for detecting fast-moving objects like Beyblades during a match.
 
 ### Model Architecture:
-- **Layers**: 168
-- **Parameters**: 3,006,038
-- **Gradients**: 0
-- **GFLOPs**: 8.1
+- **Layers**: 225
+- **Parameters**: 3,011,043
+- **Gradients**: 3,011,027
+- **GFLOPs**: 8.2
 
 ### Data
 The labeled images were obtained from the following sources:
@@ -27,7 +26,12 @@ The labeled images were obtained from the following sources:
 ---
 
 ## 2. YOLOv8 Training
-The training process for the YOLOv8 model is conducted in the Jupyter notebook titled `training_beyblade.ipynb`. This notebook contains the necessary steps for preparing the dataset, configuring the model parameters, and training the model on the Beyblade dataset. The final trained model is saved in the file named `best.pt`.
+The training process for the YOLOv8 model is conducted in the Google Colab titled training_beyblade.ipynb. This contains the necessary steps for preparing the dataset and training the model on the Beyblade dataset. The final trained model is saved in the file named best.pt.
+
+**Training Summary:**
+- **Epochs Completed**: 20 epochs completed in 0.030 hours.
+- **Optimizer Stripped**: Stripped from runs/detect/train/weights/last.pt, 6.2MB
+- **Optimizer Stripped**: Stripped from runs/detect/train/weights/best.pt, 6.2MB
 
 ---
 
@@ -35,31 +39,16 @@ The training process for the YOLOv8 model is conducted in the Jupyter notebook t
 The accuracy of the model is evaluated through various metrics such as Precision, Recall, and mAP. Below is a summary of the model's performance:
 
 ### Overall Performance:
-- **Total Images**: 39
-- **Total Instances**: 78
-- **Box Precision (P)**: 0.984
-- **Recall (R)**: 0.861
-- **Mean Average Precision at IoU=0.50 (mAP50)**: 0.941
-- **Mean Average Precision at IoU=0.50 to 0.95 (mAP50-95)**: 0.684
+- **Total Images**: 50
+- **Total Instances**: 187
+- **Box Precision (P)**: 0.994
+- **Recall (R)**: 0.963
+- **Mean Average Precision at IoU=0.50 (mAP50)**: 0.992
+- **Mean Average Precision at IoU=0.50 to 0.95 (mAP50-95)**: 0.819
 
-### Class-Specific Performance:
-#### Beyblade:
-- **Images**: 35
-- **Instances**: 67
-- **Precision**: 1.000 (indicating potential overfitting)
-- **Recall**: 0.995
-- **mAP50**: 0.995
-- **mAP50-95**: 0.868
+*Speed*: 0.2ms preprocess, 2.2ms inference, 0.0ms loss, 2.9ms postprocess per image.
 
-#### Hand:
-- **Images**: 7
-- **Instances**: 11
-- **Precision**: 0.969
-- **Recall**: 0.727
-- **mAP50**: 0.887
-- **mAP50-95**: 0.500
-
-*Note*: The Precision value of 1.000 for Beyblades suggests potential overfitting, meaning that the model performs extremely well on the training data but may struggle when generalizing to unseen data.
+*Note*: The high precision and recall values indicate the model performs well in detecting Beyblades during training.
 
 ---
 
@@ -97,7 +86,9 @@ The processed data is saved to a **CSV file** which includes:
 - **Status** (Winner, Loser, or Draw)
 - **Match Duration** (in seconds)
 
-The CSV file (`beyblade_battle_report.csv`) provides a summary of the battle that can be used for further analysis by Bakuten Shoot Corp.'s data analysts.
+The CSV file (beyblade_battle_report.csv) provides a summary of the battle that can be used for further analysis by Bakuten Shoot Corp.'s data analysts.
 
+### Video Input and Output
+For demonstration, you can access the input and output videos using the following link: [Input and Output Videos ![video icon](https://img.icons8.com/ios-filled/24/000000/video.png)](https://drive.google.com/drive/folders/1JFc2wyTudDbvRg3881mLQKiXAk8TzABj?usp=sharing).  
 ### Video Input and Output
 For demonstration, you can access the input and output videos using the following link: [Input and Output Videos ![video icon](https://img.icons8.com/ios-filled/24/000000/video.png)](https://drive.google.com/drive/folders/1JFc2wyTudDbvRg3881mLQKiXAk8TzABj?usp=sharing).
