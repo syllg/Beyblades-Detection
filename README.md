@@ -18,8 +18,8 @@ The Beyblade detection model is based on the YOLO (You Only Look Once) architect
 
 ### Data
 The labeled images were obtained from the following sources:
-- **Dataset**: [Beyblade Dataset ![dataset icon](https://img.icons8.com/ios-filled/24/000000/dataset.png)](https://universe.roboflow.com/ds-oruoc/beyblade-nttrl)
-- **Backup Dataset**: [Additional Dataset ![backup icon](https://img.icons8.com/ios-filled/24/000000/dataset.png)](https://drive.google.com/drive/folders/1CD5QARBdz6SvEcQH5dciN0iEZyei3PTt?usp=sharing)
+- **Dataset**: [Beyblade Dataset](https://universe.roboflow.com/yolov8-kinetixpro-training/beyblade-gpafs)
+- **Backup Dataset**: [Additional Dataset](https://drive.google.com/drive/folders/1uA2O0JTvouBUFI5GpY_gn8Rq8SJ6lONW?usp=drive_link)
 - **Provided by**: A Roboflow user
 - **License**: CC BY 4.0
 
