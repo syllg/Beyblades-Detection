@@ -1,8 +1,7 @@
-
-beyblade - v2 2024-09-18 6:42pm
+Beyblade - v4 2024-06-28 7:55pm
 ==============================
 
-This dataset was exported via roboflow.com on September 18, 2024 at 6:42 PM GMT
+This dataset was exported via roboflow.com on June 28, 2024 at 7:55 PM GMT
 
 Roboflow is an end-to-end computer vision platform that helps you
 * collaborate with your team on computer vision projects
@@ -17,13 +16,11 @@ visit https://github.com/roboflow/notebooks
 
 To find over 100k other datasets and pre-trained models, visit https://universe.roboflow.com
 
-The dataset includes 196 images.
-Beybladeobj are annotated in YOLOv8 format.
+The dataset includes 217 images.
+Beyblade are annotated in YOLOv8 format.
 
 The following pre-processing was applied to each image:
 * Auto-orientation of pixel data (with EXIF-orientation stripping)
-* Resize to 640x640 (Fit within)
+* Resize to 640x640 (Stretch)
 
 No image augmentation techniques were applied.
-
-
