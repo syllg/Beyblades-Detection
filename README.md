@@ -52,32 +52,66 @@ The accuracy of the model is evaluated through various metrics such as Precision
 
 ---
 
-## 4. Logic Behind Additional Data Generation
-
+## 4. Logic Behind the Detection Process
 Once the model detects Beyblades in the video frames, the code performs the following key tasks:
 
-### Frame Processing
-- The video is first loaded using OpenCV, and key information such as the **total number of frames** and **frames per second (FPS)** are retrieved.
-- The **match duration** is calculated by dividing the total number of frames by the FPS.
+### Video Capture and Frame Information
+- The video file is opened using OpenCV's `cv2.VideoCapture`, allowing frame-by-frame access.
+- Total number of frames and frames per second (FPS) are retrieved, which is crucial for understanding the video's duration and calculating time-related metrics.
 
-### Object Detection
-- For each frame in the video, the program detects Beyblades using the YOLOv8 model. If objects labeled as **"beyblade"** (indicating spinning) or **"stop"** (indicating non-spinning) are detected, relevant data such as bounding box coordinates, confidence scores, and widths of detected objects are extracted.
-  
-### Detection Data Storage
-- The program stores detection data such as the **frame number**, **detected condition** (spinning or stopped), **bounding box coordinates**, and **confidence score**.
-  
-### Beyblade Type Assignment
-- If two Beyblades are detected in a single frame, their bounding box **widths** are compared:
-  - The Beyblade with the **larger width** is assigned as **Beyblade 1** (usually the larger or closer one).
-  - The Beyblade with the **smaller width** is assigned as **Beyblade 2**.
+### Frame Processing Loop
+1. **Validating Starting Frame**: The specified starting frame is checked for validity.
+2. **Detection**: For each frame, the `detect_beyblades` function utilizes the pre-trained YOLO model (`best.pt`) to identify Beyblades, returning:
+   - Class IDs (representing the detected objects)
+   - Confidence scores
+   - Bounding box coordinates (x, y, width, height)
 
-### Match Outcome Logic
-- The match outcome is determined based on the number of **"stop"** detections for each Beyblade:
-  - The Beyblade with the **fewest "stop" conditions** is declared the **winner**.
-  - If both Beyblades have the same number of stops, the result is declared a **draw**.
+### Data Extraction
+- The detected data is processed to extract:
+  - Frame number
+  - Condition of each Beyblade (spinning or stopped)
+  - Bounding box dimensions
+  - Width of the bounding box (to distinguish between Beyblades)
 
-### Final Output
-The processed data is saved to a **CSV file** which includes:
+### Beyblade Classification
+- The largest detected object is labeled as "Beyblade 1" and the smallest as "Beyblade 2." This classification is crucial for subsequent collision detection and determining the winner.
+
+### Collision Detection
+- **Overlap Check**: Collision detection logic checks if "Beyblade 1" and "Beyblade 2" are detected simultaneously and whether their bounding boxes intersect.
+- **Collision Flag**: If a collision occurs while both Beyblades are spinning, a collision flag is set to "Yes," and a counter for total collisions is incremented.
+
+### Determining Winner and Loser
+- The code tracks the conditions of each Beyblade over the frames, counting how many times each has transitioned from spinning to stopped. The Beyblade with more "stop" occurrences is labeled as the loser.
+
+### Time Tracking
+- A cumulative time column tracks the elapsed time since the start of the battle, calculated using the frame index and FPS.
+
+### Saving the Results
+- Detection results are saved to a CSV file (`beyblade_battle_frame_report.csv`) including:
+  - Frame number
+  - Conditions of both Beyblades
+  - Collision information
+  - Additional statistics for each frame
+
+---
+
+## Summary Report Generation
+The second part of the code analyzes the generated frame report to create a summary of the battle outcome:
+
+### 1. Loading the Report
+- The previously generated frame report is loaded into a new DataFrame for aggregation and analysis.
+
+### 2. Winner and Loser Identification
+- The code identifies the winner and loser based on the conditions recorded in the frame report.
+
+### 3. Reason for Outcome
+- **Stop Reason**: The code examines frame data for instances where one Beyblade spins while the other stops for five consecutive frames, triggering a game-ending condition.
+- **Exiting the Arena**: If neither Beyblade is detected for ten consecutive frames, it assumes that one has exited the arena, leading to a game conclusion.
+
+### Summary Saving
+- The summary is saved to a new CSV file (`beyblade_battle_summary.csv`), providing an overview of the battle results.
+
+The processed data is saved to a **CSV file**, which includes:
 - **Frame Number**
 - **Condition** (spinning or stopped)
 - **Bounding Box Coordinates**
