@@ -114,11 +114,16 @@ The second part of the code analyzes the generated frame report to create a summ
 The processed data is saved to a **CSV file**, which includes:
 - **Frame Number**
 - **Condition** (spinning or stopped)
-- **Bounding Box Coordinates**
+- **Bounding Box Coordinates** (x1,x2,y1,y2)
 - **Confidence Score**
 - **Beyblade Type** (Beyblade 1 or Beyblade 2)
 - **Status** (Winner, Loser, or Draw)
 - **Match Duration** (in seconds)
+- **Winner and Loser**
+- **Game Over Reason**
+- **Game Over Timing**
+- **Total Cillition Count**
+- **Video Analized Name**
 
 The CSV file (beyblade_battle_report.csv) provides a summary of the battle that can be used for further analysis by Bakuten Shoot Corp.'s data analysts.
 
