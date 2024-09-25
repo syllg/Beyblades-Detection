@@ -129,5 +129,3 @@ The CSV file (beyblade_battle_report.csv) provides a summary of the battle that 
 
 ### Video Input and Output
 For demonstration, you can access the input and output videos using the following link: [Input and Output Videos ![video icon](https://img.icons8.com/ios-filled/24/000000/video.png)](https://drive.google.com/drive/folders/1JFc2wyTudDbvRg3881mLQKiXAk8TzABj?usp=sharing).  
-### Video Input and Output
-For demonstration, you can access the input and output videos using the following link: [Input and Output Videos ![video icon](https://img.icons8.com/ios-filled/24/000000/video.png)](https://drive.google.com/drive/folders/1JFc2wyTudDbvRg3881mLQKiXAk8TzABj?usp=sharing).
